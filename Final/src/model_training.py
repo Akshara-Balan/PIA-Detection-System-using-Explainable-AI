@@ -1,13 +1,13 @@
 import numpy as np
 import joblib
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, save_model
 from tensorflow.keras.layers import LSTM, Dense, Embedding, SpatialDropout1D
 from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.utils.class_weight import compute_class_weight
-from .config import CONFIG, MODEL_DIR
-from .data_processing import load_and_preprocess_data
+from config import CONFIG, MODEL_DIR
+from data_processing import load_and_preprocess_data
 
 def build_model(num_classes: int) -> Sequential:
     """Construct LSTM model."""
@@ -58,5 +58,12 @@ def train():
     print(classification_report(y_test, y_pred, target_names=joblib.load(MODEL_DIR / "label_encoder.pkl").classes_))
 
     # Save model
-    model.save(MODEL_DIR / "lstm_model.keras")
+    save_model(model, str(MODEL_DIR / "lstm_model.keras"))
     return model
+
+# Add this at the bottom of model_training.py:
+if __name__ == "__main__":
+    print("⏳ Starting model training...")
+    trained_model = train()
+    print("✅ Training completed successfully!")
+    print(f"Model saved to: {MODEL_DIR}/lstm_model.keras")

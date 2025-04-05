@@ -2,9 +2,9 @@ import streamlit as st
 import joblib
 import numpy as np
 from tensorflow.keras.models import load_model
-from .data_processing import clean_text, load_and_preprocess_data
-from .shap_analysis import SHAPExplainer
-from .config import MODEL_DIR
+from data_processing import clean_text, load_and_preprocess_data
+from shap_analysis import SHAPExplainer
+from config import MODEL_DIR
 
 def main():
     st.set_page_config(page_title="Prompt Injection Detector", layout="wide")

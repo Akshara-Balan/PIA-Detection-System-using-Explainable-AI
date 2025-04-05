@@ -6,7 +6,7 @@ from sklearn.preprocessing import LabelEncoder
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from typing import Tuple, Optional
-from .config import DATA_DIR, MODEL_DIR, CONFIG
+from config import DATA_DIR, MODEL_DIR, CONFIG
 
 def clean_text(text: str) -> str:
     """Clean and preprocess text."""
